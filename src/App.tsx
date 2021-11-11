@@ -11,4 +11,6 @@ export function App() {
   )
 }
 
-export default App
+export default App;
+
+// * 1:14:00
