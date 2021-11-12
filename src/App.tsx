@@ -10,7 +10,7 @@ export function App() {
   const { user } = useContext(AuthContext);
 
   return (
-    <main className={styles.contentWrapper}>
+    <main className={`${styles.contentWrapper} ${!!user ? styles.contentSigned : ''}`}>
       <MessageList />
       { !!user ? <SendMessageForm /> : <LoginBox />}
     </main>
@@ -18,5 +18,3 @@ export function App() {
 }
 
 export default App;
-
-// * 1:14:00
