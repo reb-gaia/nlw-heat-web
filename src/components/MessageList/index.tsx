@@ -15,17 +15,17 @@ type Message = {
 
 let messagesQueue: Message[] = [];
 
-const socket = io('htttp://localhost:4000');
+const socket = io('http://localhost:4000');
 
-socket.on('new_message', newMessage => {
+socket.on('new_message', (newMessage: Message) => {
   messagesQueue.push(newMessage);
-}) 
+})
 
 export function MessageList() {
   const [messages, setMessages] = useState<Message[]>([]);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    setInterval(() => {
       if (messagesQueue.length > 0) {
         setMessages(prevState => [
           messagesQueue[0],
@@ -39,7 +39,7 @@ export function MessageList() {
   }, [])
 
   useEffect(() => {
-    api.get<Message[]>('/messages/last3')
+    api.get<Message[]>('messages/last3')
       .then(response => {
         setMessages(response.data);
       })

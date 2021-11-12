@@ -1,8 +1,8 @@
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import { api } from "../services/api";
 
 type User = {
-  id: number;
+  id: string;
   name: string;
   login: string;
   avatar_url: string;
@@ -17,7 +17,7 @@ type AuthContextData = {
 type AuthResponse = {
   token: string;
   user: {
-    id: number;
+    id: string;
     avatar_url: string;
     name: string;
     login: string;
@@ -45,7 +45,7 @@ export function AuthProvider(props: AuthProvider) {
     localStorage.setItem('@dowhile:token', token);
 
     api.defaults.headers.common.authorization = `Bearer ${token}`;
- 
+
     setUser(user);
   }
 
@@ -80,7 +80,7 @@ export function AuthProvider(props: AuthProvider) {
       signIn(githubCode);
     }
   }, [])
-  
+
   return (
     <AuthContext.Provider value={{ signInUrl, user, signOut }}>
       {props.children}
